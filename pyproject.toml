@@ -1,0 +1,11 @@
+[project]
+name = "crapy"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "bs4>=0.0.2",
+    "pymongo>=4.16.0",
+    "scrapy>=2.14.1",
+]
