@@ -9,3 +9,10 @@ wheels/
 # Virtual environments
 .venv
 test.json
+.env
+*.json
+*.txt
+*.pdf
+*.xlsx
+*.docx
+*.doc

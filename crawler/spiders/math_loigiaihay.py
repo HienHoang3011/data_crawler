@@ -46,6 +46,31 @@ class LoiGiaiHayMathSpider(scrapy.Spider):
     def parse(self, response):
         soup = BeautifulSoup(response.text, "html.parser")
 
+        # derive grade from URL (e.g. '-11-c46a') and set subject
+        grade = None
+        # Robust grade extraction from URL. Prefer explicit pattern before '-c...' (e.g. '-12-c47a...')
+        # 1) try to find digits immediately followed by '-c' (common pattern in generated links)
+        matches = re.findall(r'-(\d{1,2})-c', response.url)
+        if matches:
+            # prefer larger grades (11,12) if present, otherwise take the last match
+            for prefer in ('12', '11', '10'):
+                if prefer in matches:
+                    grade = prefer
+                    break
+            else:
+                grade = matches[-1]
+        else:
+            # fallback: find numeric segments separated by hyphens and try to pick a plausible grade
+            nums = re.findall(r'-(\d{1,2})-', response.url)
+            if nums:
+                for prefer in ('12', '11', '10'):
+                    if prefer in nums:
+                        grade = prefer
+                        break
+                else:
+                    # take last numeric segment if nothing better
+                    grade = nums[-1]
+
         # bỏ bảng đáp án
         for t in soup.find_all("table"):
             t.decompose()
@@ -62,6 +87,7 @@ class LoiGiaiHayMathSpider(scrapy.Spider):
 
         for p in paragraphs:
             text = p.get_text(strip=True)
+            text = text.replace('\xa0', ' ')
             has_img = p.find("img") is not None
             m = re.search(r"Câu\s+(\d+)", text)
 
@@ -72,6 +98,9 @@ class LoiGiaiHayMathSpider(scrapy.Spider):
                 # lần đầu → question
                 if cau not in items:
                     item = ExamMathItem()
+                    # minimal fields to populate for easier downstream use
+                    item["subject"] = "math"
+                    item["grade"] = grade
                     item["question"] = text
                     item["reasoning"] = ""
                     item["answer"] = ""
@@ -79,7 +108,20 @@ class LoiGiaiHayMathSpider(scrapy.Spider):
                     items[cau] = item
                     mode[cau] = "question"
                 else:
-                    # lần 2 → reasoning
+                    # extract inline answer if the 'Câu N' paragraph also includes the answer like 'Câu 19: (A)'
+                    ans = self.extract_inline_answer(text)
+                    if ans:
+                        items[cau]["answer"] = ans
+
+                    # if there's any additional content after 'Câu <n>' (e.g. 'Câu 4: (B) explanation'),
+                    # keep that remainder in the reasoning bucket so it's not lost.
+                    try:
+                        rest = re.sub(rf'^.*?Câu\s*{cau}\s*[:\)\.\-\s]*', '', text, flags=re.IGNORECASE)
+                    except re.error:
+                        rest = ''
+                    if rest.strip():
+                        items[cau]["reasoning"] += "\n" + rest.strip()
+
                     mode[cau] = "reasoning"
 
                 current_cau = cau
@@ -100,9 +142,10 @@ class LoiGiaiHayMathSpider(scrapy.Spider):
 
         # ===== FINALIZE =====
         for item in items.values():
-            item["answer"] = self.extract_answer_1(item["reasoning"])
-            if item["answer"] == "":
-                item['answer'] = self.extract_answer_2(item["question"])
+            if not item["answer"]:
+                item["answer"] = self.extract_answer_1(item["reasoning"])
+            if not item["answer"]:
+                item["answer"] = self.extract_answer_2(item["question"])
             yield item
 
 
@@ -135,30 +178,28 @@ class LoiGiaiHayMathSpider(scrapy.Spider):
 
         return ''
     def extract_answer_2(self, text):
-        import re
-        import unicodedata
-
         if not text:
             return ''
 
-        # try explicit 'Đáp án' pattern first (with accents)
-        m = re.search(r'Đáp án[:\s]*([A-D])\b', text, re.IGNORECASE)
-        if m:
-            return m.group(1).upper()
-
-        # normalize (remove diacritics) to match variants like 'câu 1:C' or 'cau 1: C'
+        # normalize unicode
         nf = unicodedata.normalize('NFD', text)
         plain = ''.join(c for c in nf if unicodedata.category(c) != 'Mn')
         plain_low = plain.lower()
 
-        # match patterns like 'cau 1:C', 'cau1: c', 'cau 1 ) C' etc.
-        m = re.search(r'cau\s*\d+\s*[:\)\.\-\s]*([a-d])\b', plain_low)
+        # FIXED regex: allow optional parentheses
+        m = re.search(
+            r'cau\s*\d+\s*[:\)\.\-\s]*\(?\s*([a-d])\s*\)?',
+            plain_low
+        )
         if m:
             return m.group(1).upper()
 
-        # fallback: simple 'dap an' without accents (already normalized)
+        # fallback
         m = re.search(r'dap an[:\s]*([a-d])\b', plain_low)
         if m:
             return m.group(1).upper()
 
         return ''
+
+    def extract_inline_answer(self, text):
+          return self.extract_answer_2(text)

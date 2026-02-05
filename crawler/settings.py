@@ -23,8 +23,8 @@ ROBOTSTXT_OBEY = True
 
 # Concurrency and throttling settings
 #CONCURRENT_REQUESTS = 16
-CONCURRENT_REQUESTS_PER_DOMAIN = 1
-DOWNLOAD_DELAY = 1
+CONCURRENT_REQUESTS_PER_DOMAIN = 4
+DOWNLOAD_DELAY = 2
 
 # Disable cookies (enabled by default)
 #COOKIES_ENABLED = False
@@ -85,3 +85,12 @@ ITEM_PIPELINES = {
 
 # Set settings whose default value is deprecated to a future-proof value
 FEED_EXPORT_ENCODING = "utf-8"
+
+# Logging configuration: write Scrapy logs to a file (txt)
+LOG_ENABLED = True
+# Use 'DEBUG' for more verbose logs
+LOG_LEVEL = "INFO"
+# Set to True to redirect print() output into the Scrapy logger
+LOG_STDOUT = False
+# Relative path where the log file will be created when running the crawler
+LOG_FILE = "scrapy_log.txt"

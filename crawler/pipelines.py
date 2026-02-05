@@ -7,8 +7,6 @@ class ExamPipeline:
     def process_item(self, item, spider):
         if not item.get('answer'):
             raise DropItem("Missing answer in %s" % item)
-        if not item.get('reasoning'):
-            raise DropItem("Missing reasoning in %s" % item)
         if not item.get('question'):
             raise DropItem("Missing question in %s" % item)
         if not item.get('grade'):
