@@ -2,6 +2,7 @@
 from itemadapter import ItemAdapter
 from scrapy.exceptions import DropItem
 import re
+from pathlib import Path
 
 class ExamPipeline:
     def process_item(self, item, spider):
@@ -25,4 +26,21 @@ class ExamPipeline:
         item['reasoning'] = re.sub(regex_pattern1, '', item['reasoning']).strip()
         item['reasoning'] = item['reasoning'].strip()
         item['answer'] = item['answer'].strip()
+        return item
+
+class PtitPipeline:
+    def process_item(self, item, spider):
+        if not item.get('text'):
+            raise DropItem("Missing text in item")
+        if not item.get('key'):
+            raise DropItem("Missing key in item")
+        
+        # Tạo thư mục nếu chưa tồn tại
+        output_dir = Path("crawler/chunking/data/ptit")
+        output_dir.mkdir(parents=True, exist_ok=True)
+        
+        output_file = output_dir / f"{item['key']}.txt"
+        with open(output_file, "w", encoding="utf-8") as f:
+            f.write(item['text'])
+        
         return item
