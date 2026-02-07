@@ -3,58 +3,8 @@ from ..items import StemItem
 import re
 from bs4 import BeautifulSoup
 import unicodedata
+from ..utils.get_collections import *
 
-
-def create_collection_link_math_10():
-    collection_math_10 = [
-        "https://loigiaihay.com/de-khao-sat-chat-luong-dau-nam-lop-10-mon-toan-de-so-2-a113801.html",
-        "https://loigiaihay.com/de-khao-sat-chat-luong-dau-nam-lop-10-mon-toan-de-so-4-a113803.html"
-    ]
-    link_math_10_gk1 = [
-        "https://loigiaihay.com/de-thi-giua-ki-1-toan-10-ket-noi-tri-thuc-de-so-1-a121902.html",
-        "https://loigiaihay.com/de-thi-giua-ki-1-toan-10-ket-noi-tri-thuc-de-so-2-a122128.html",
-        "https://loigiaihay.com/de-thi-giua-ki-1-toan-10-ket-noi-tri-thuc-de-so-3-a122129.html",
-        "https://loigiaihay.com/de-thi-giua-ki-1-toan-10-ket-noi-tri-thuc-de-so-4-a122130.html",
-        "https://loigiaihay.com/de-thi-giua-ki-1-toan-10-de-so-6-a152176.html",
-        "https://loigiaihay.com/de-thi-giua-ki-1-toan-10-ket-noi-tri-thuc-de-so-6-a152177.html",
-        "https://loigiaihay.com/de-thi-giua-ki-1-toan-10-ket-noi-tri-thuc-de-so-7-a152188.html",
-        "https://loigiaihay.com/de-thi-giua-ki-1-toan-10-ket-noi-tri-thuc-de-so-8-a152197.html",
-        "https://loigiaihay.com/de-thi-giua-ki-1-toan-10-ket-noi-tri-thuc-de-so-9-a152203.html",
-        "https://loigiaihay.com/de-thi-giua-ki-1-toan-10-ket-noi-tri-thuc-de-so-10-a152210.html",
-        "https://loigiaihay.com/de-thi-giua-ki-1-toan-10-ket-noi-tri-thuc-de-so-11-a176248.html",
-        "https://loigiaihay.com/de-thi-giua-ki-1-toan-10-ket-noi-tri-thuc-de-so-12-a176249.html",
-        "https://loigiaihay.com/de-thi-giua-ki-1-toan-10-ket-noi-tri-thuc-de-so-13-a176250.html",
-        "https://loigiaihay.com/de-thi-giua-ki-1-toan-10-de-so-14-a188967.html",
-        "https://loigiaihay.com/de-thi-giua-ki-1-toan-10-de-so-15-a188972.html"
-    ]
-    link_math_10_gk1 += [
-        "https://loigiaihay.com/de-thi-hoc-ki-1-toan-10-ket-noi-tri-thuc-de-so-1-a124204.html",
-        "https://loigiaihay.com/de-thi-hoc-ki-1-toan-10-ket-noi-tri-thuc-de-so-2-a124237.html",
-        "https://loigiaihay.com/de-thi-hoc-ki-1-toan-10-ket-noi-tri-thuc-de-so-3-a124238.html",
-        "https://loigiaihay.com/de-thi-hoc-ki-1-toan-10-ket-noi-tri-thuc-de-so-4-a124240.html",
-        "https://loigiaihay.com/de-thi-hoc-ki-1-toan-10-ket-noi-tri-thuc-de-so-5-a124393.html",
-        "https://loigiaihay.com/de-thi-hoc-ki-1-toan-10-ket-noi-tri-thuc-de-so-6-a124394.html",
-        "https://loigiaihay.com/de-thi-hoc-ki-1-toan-10-ket-noi-tri-thuc-de-so-6-a124395.html",
-        "https://loigiaihay.com/de-thi-hoc-ki-1-toan-10-ket-noi-tri-thuc-de-so-9-a124425.html",
-        "https://loigiaihay.com/de-thi-hoc-ki-1-toan-10-ket-noi-tri-thuc-de-so-9-a124426.html",
-        "https://loigiaihay.com/de-thi-hoc-ki-1-toan-10-ket-noi-tri-thuc-de-so-11-a178718.html",
-        "https://loigiaihay.com/de-thi-hoc-ki-1-toan-10-ket-noi-tri-thuc-de-so-11-a178719.html",
-        "https://loigiaihay.com/de-thi-hoc-ki-1-toan-10-ket-noi-tri-thuc-de-so-11-a178720.html",
-        "https://loigiaihay.com/de-thi-hoc-ki-1-toan-10-ket-noi-tri-thuc-de-so-15-a189469.html"
-    ]
-    link_math_10_gk2 = [
-        "https://loigiaihay.com/de-thi-giua-ki-2-toan-10-ket-noi-tri-thuc-de-so-1-a156395.html",
-        "https://loigiaihay.com/de-thi-giua-ki-2-toan-10-ket-noi-tri-thuc-de-so-2-a156399.html",
-        "https://loigiaihay.com/de-thi-giua-ki-2-toan-10-ket-noi-tri-thuc-de-so-3-a156400.html",
-        "https://loigiaihay.com/de-kiem-tra-hoc-ki-2-toan-10-de-so-1-ket-noi-tri-thuc-a134980.html",
-        "https://loigiaihay.com/de-kiem-tra-hoc-ki-2-toan-10-de-so-ket-noi-tri-thuc-a135043.html",
-        "https://loigiaihay.com/de-kiem-tra-hoc-ki-2-toan-10-de-so-3-ket-noi-tri-thuc-a135044.html",
-        "https://loigiaihay.com/de-kiem-tra-hoc-ki-2-toan-10-de-so-4-ket-noi-tri-thuc-a135046.html",
-        
-    ]
-    collection_math_10 += link_math_10_gk1
-    collection_math_10 += link_math_10_gk2
-    return collection_math_10
 
 def is_multiple_choice_question(text):
     if not text or not isinstance(text, str):
@@ -75,7 +25,9 @@ def is_multiple_choice_question(text):
 
 class StemLoigiaihaySpider(scrapy.Spider):
     name = "stem_loigiaihay"
-    start_urls = create_collection_link_math_10()
+    start_urls = [
+        "https://loigiaihay.com/de-thi-hoc-ki-2-hoa-hoc-10-ket-noi-tri-thuc-de-1-a136735.html"
+    ]
     IMAGE_MARK = "[[HAS_IMAGE]]"
     custom_settings = {
         "ITEM_PIPELINES": {
@@ -85,7 +37,6 @@ class StemLoigiaihaySpider(scrapy.Spider):
     def parse(self, response):
         soup = BeautifulSoup(response.text, "html.parser")
         div = soup.find("div", id="box-content")
-        
         # Thay thế tất cả thẻ img bằng image mark
         for img in div.find_all("img"):
             img.replace_with(self.IMAGE_MARK)
@@ -94,7 +45,7 @@ class StemLoigiaihaySpider(scrapy.Spider):
             tag.decompose()
         text = div.get_text("\n")
         
-        # Loại bỏ phần tự luận nếu tìm thấy
+        # # Loại bỏ phần tự luận nếu tìm thấy
         idx1 = text.lower().find("tự luận")
         idx2 = text.lower().find("lời giải")
         if idx1 != -1 and idx2 != -1 and idx1 < idx2:
@@ -138,7 +89,7 @@ class StemLoigiaihaySpider(scrapy.Spider):
                 if cau not in items:
                     item = StemItem()
                     # minimal fields to populate for easier downstream use
-                    item["subject"] = "math"
+                    item["subject"] = "chemical"
                     item["grade"] = grade
                     item["question"] = text
                     item["reasoning"] = ""

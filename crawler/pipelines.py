@@ -62,7 +62,11 @@ class StemPipeline:
         if "bảng" in item['question']:
             raise DropItem("Item contains the word 'bảng' in question %s" % item)
         item['question'] = item['question'].strip()
-        string_to_delete = ['Phần tự luận', 'HẾT', 'Loigiaihay.com', "Phần trắc nghiệm"]
+        string_to_delete = ['Phần tự luận',
+                            'HẾT', 'Loigiaihay.com', "Phần trắc nghiệm", 
+                            "Phần II: Tự luận", "Phần I: Trắc nghiệm",
+                            "Phần II: Phần tự luận", "Phần II: Phần tự luận (6 điểm)"
+                        ]
         for s in string_to_delete:
             item['reasoning'] = item['reasoning'].replace(s, '')
             item['question'] = item['question'].replace(s, '')

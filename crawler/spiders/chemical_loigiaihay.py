@@ -1,72 +1,61 @@
 import scrapy
-from bs4 import BeautifulSoup
+from ..items import StemItem
 import re
+from bs4 import BeautifulSoup
 import unicodedata
-from ..items import ExamMathItem
 from ..utils.get_collections import *
 
-class LoiGiaiHayMathSpider(scrapy.Spider):
-    name = "math_loigiaihay"
-    start_urls = create_collection_link_math()
+class ChemicalLoigiaihaySpider(scrapy.Spider):
+    name = "chemical_loigiaihay"
+    start_urls = create_collection_chemical_10()
     IMAGE_MARK = "[[HAS_IMAGE]]"
-
+    custom_settings = {
+        "ITEM_PIPELINES": {
+         "crawler.pipelines.StemPipeline": 300,
+        }
+    }
     def parse(self, response):
         soup = BeautifulSoup(response.text, "html.parser")
-
-        # derive grade from URL (e.g. '-11-c46a') and set subject
-        grade = None
-        # Robust grade extraction from URL. Prefer explicit pattern before '-c...' (e.g. '-12-c47a...')
-        # 1) try to find digits immediately followed by '-c' (common pattern in generated links)
-        matches = re.findall(r'-(\d{1,2})-c', response.url)
-        if matches:
-            # prefer larger grades (11,12) if present, otherwise take the last match
-            for prefer in ('12', '11', '10'):
-                if prefer in matches:
-                    grade = prefer
-                    break
-            else:
-                grade = matches[-1]
-        else:
-            # fallback: find numeric segments separated by hyphens and try to pick a plausible grade
-            nums = re.findall(r'-(\d{1,2})-', response.url)
-            if nums:
-                for prefer in ('12', '11', '10'):
-                    if prefer in nums:
-                        grade = prefer
-                        break
-                else:
-                    # take last numeric segment if nothing better
-                    grade = nums[-1]
-
-        # bỏ bảng đáp án
-        for t in soup.find_all("table"):
-            t.decompose()
-
-        box = soup.find("div", id="box-content")
-        if not box:
-            return
-
-        paragraphs = box.find_all("p")
-
-        items = {}              # cau_num -> ExamMathItem
+        div = soup.find("div", id="box-content")
+        if not div:
+            div = soup.find("div", class_="box")
+        if not div:
+            div = soup.find("div", class_="content_box")
+        # Thay thế tất cả thẻ img bằng image mark
+        for img in div.find_all("img"):
+            img.replace_with(self.IMAGE_MARK)
+        
+        for tag in div(["table"]):
+            tag.decompose()
+        text = div.get_text("\n")
+        text_final = text
+        
+        grade = "10"
+        # matches = re.findall(r'-(\d{1,2})', response.url)
+        # if matches:
+        #     for prefer in ('12', '11', '10'):
+        #         if prefer in matches:
+        #             grade = prefer
+        #             break
+        # else:
+        #     grade = matches[0]
+        
+        items = {}              # cau_num -> StemItem
         mode = {}               # cau_num -> "question" | "reasoning"
         current_cau = None
 
-        for p in paragraphs:
-            text = p.get_text(strip=True)
+        for p in text_final.splitlines():
+            text = p.strip()
             text = text.replace('\xa0', ' ')
-            has_img = p.find("img") is not None
             m = re.search(r"Câu\s+(\d+)", text)
-
-            # ===== GẶP CÂU =====
             if m:
                 cau = int(m.group(1))
 
                 # lần đầu → question
                 if cau not in items:
-                    item = ExamMathItem()
+                    item = StemItem()
                     # minimal fields to populate for easier downstream use
-                    item["subject"] = "math"
+                    item["subject"] = "chemical"
                     item["grade"] = grade
                     item["question"] = text
                     item["reasoning"] = ""
@@ -100,10 +89,6 @@ class LoiGiaiHayMathSpider(scrapy.Spider):
 
             # ===== APPEND NỘI DUNG =====
             target = items[current_cau][mode[current_cau]]
-
-            if has_img:
-                target += "\n" + self.IMAGE_MARK
-
             target += "\n" + text
             items[current_cau][mode[current_cau]] = target
 
