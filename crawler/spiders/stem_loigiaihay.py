@@ -10,11 +10,22 @@ def create_collection_link_math_10():
         "https://loigiaihay.com/de-khao-sat-chat-luong-dau-nam-lop-10-mon-toan-de-so-2-a113801.html",
         "https://loigiaihay.com/de-khao-sat-chat-luong-dau-nam-lop-10-mon-toan-de-so-4-a113803.html"
     ]
-    so_de = 15
-    start_id = 902
     link_math_10_gk1 = [
-        f"https://loigiaihay.com/de-thi-giua-ki-1-toan-10-ket-noi-tri-thuc-de-so-{i}-a121{start_id + i - 1}.html"
-        for i in range(1, so_de + 1)
+        "https://loigiaihay.com/de-thi-giua-ki-1-toan-10-ket-noi-tri-thuc-de-so-1-a121902.html",
+        "https://loigiaihay.com/de-thi-giua-ki-1-toan-10-ket-noi-tri-thuc-de-so-2-a122128.html",
+        "https://loigiaihay.com/de-thi-giua-ki-1-toan-10-ket-noi-tri-thuc-de-so-3-a122129.html",
+        "https://loigiaihay.com/de-thi-giua-ki-1-toan-10-ket-noi-tri-thuc-de-so-4-a122130.html",
+        "https://loigiaihay.com/de-thi-giua-ki-1-toan-10-de-so-6-a152176.html",
+        "https://loigiaihay.com/de-thi-giua-ki-1-toan-10-ket-noi-tri-thuc-de-so-6-a152177.html",
+        "https://loigiaihay.com/de-thi-giua-ki-1-toan-10-ket-noi-tri-thuc-de-so-7-a152188.html",
+        "https://loigiaihay.com/de-thi-giua-ki-1-toan-10-ket-noi-tri-thuc-de-so-8-a152197.html",
+        "https://loigiaihay.com/de-thi-giua-ki-1-toan-10-ket-noi-tri-thuc-de-so-9-a152203.html",
+        "https://loigiaihay.com/de-thi-giua-ki-1-toan-10-ket-noi-tri-thuc-de-so-10-a152210.html",
+        "https://loigiaihay.com/de-thi-giua-ki-1-toan-10-ket-noi-tri-thuc-de-so-11-a176248.html",
+        "https://loigiaihay.com/de-thi-giua-ki-1-toan-10-ket-noi-tri-thuc-de-so-12-a176249.html",
+        "https://loigiaihay.com/de-thi-giua-ki-1-toan-10-ket-noi-tri-thuc-de-so-13-a176250.html",
+        "https://loigiaihay.com/de-thi-giua-ki-1-toan-10-de-so-14-a188967.html",
+        "https://loigiaihay.com/de-thi-giua-ki-1-toan-10-de-so-15-a188972.html"
     ]
     link_math_10_gk1 += [
         "https://loigiaihay.com/de-thi-hoc-ki-1-toan-10-ket-noi-tri-thuc-de-so-1-a124204.html",

@@ -59,6 +59,9 @@ class StemPipeline:
         image_mark = '[[HAS_IMAGE]]'
         if image_mark in raw_string:
             raise DropItem("Item contains image mark in %s" % item)
+        if "bảng" in item['question']:
+            raise DropItem("Item contains the word 'bảng' in question %s" % item)
+        item['question'] = item['question'].strip()
         string_to_delete = ['Phần tự luận', 'HẾT', 'Loigiaihay.com', "Phần trắc nghiệm"]
         for s in string_to_delete:
             item['reasoning'] = item['reasoning'].replace(s, '')
@@ -69,7 +72,6 @@ class StemPipeline:
         regex_pattern = r"Câu\s+(\d+)(\s*)[:.]\s*"
         if re.match(regex_pattern, item['question']):
             item['question'] = re.sub(regex_pattern, '', item['question'], count=1).strip()
-        item['question'] = item['question'].strip()
         regex_pattern1 = r"Loigiaihay.com\s*"
         item['reasoning'] = re.sub(regex_pattern1, '', item['reasoning']).strip()
         item['reasoning'] = item['reasoning'].strip()
