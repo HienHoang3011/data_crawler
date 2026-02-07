@@ -5,6 +5,46 @@ from bs4 import BeautifulSoup
 import unicodedata
 
 
+def create_collection_link_math_10():
+    collection_math_10 = [
+        "https://loigiaihay.com/de-khao-sat-chat-luong-dau-nam-lop-10-mon-toan-de-so-2-a113801.html",
+        "https://loigiaihay.com/de-khao-sat-chat-luong-dau-nam-lop-10-mon-toan-de-so-4-a113803.html"
+    ]
+    so_de = 15
+    start_id = 902
+    link_math_10_gk1 = [
+        f"https://loigiaihay.com/de-thi-giua-ki-1-toan-10-ket-noi-tri-thuc-de-so-{i}-a121{start_id + i - 1}.html"
+        for i in range(1, so_de + 1)
+    ]
+    link_math_10_gk1 += [
+        "https://loigiaihay.com/de-thi-hoc-ki-1-toan-10-ket-noi-tri-thuc-de-so-1-a124204.html",
+        "https://loigiaihay.com/de-thi-hoc-ki-1-toan-10-ket-noi-tri-thuc-de-so-2-a124237.html",
+        "https://loigiaihay.com/de-thi-hoc-ki-1-toan-10-ket-noi-tri-thuc-de-so-3-a124238.html",
+        "https://loigiaihay.com/de-thi-hoc-ki-1-toan-10-ket-noi-tri-thuc-de-so-4-a124240.html",
+        "https://loigiaihay.com/de-thi-hoc-ki-1-toan-10-ket-noi-tri-thuc-de-so-5-a124393.html",
+        "https://loigiaihay.com/de-thi-hoc-ki-1-toan-10-ket-noi-tri-thuc-de-so-6-a124394.html",
+        "https://loigiaihay.com/de-thi-hoc-ki-1-toan-10-ket-noi-tri-thuc-de-so-6-a124395.html",
+        "https://loigiaihay.com/de-thi-hoc-ki-1-toan-10-ket-noi-tri-thuc-de-so-9-a124425.html",
+        "https://loigiaihay.com/de-thi-hoc-ki-1-toan-10-ket-noi-tri-thuc-de-so-9-a124426.html",
+        "https://loigiaihay.com/de-thi-hoc-ki-1-toan-10-ket-noi-tri-thuc-de-so-11-a178718.html",
+        "https://loigiaihay.com/de-thi-hoc-ki-1-toan-10-ket-noi-tri-thuc-de-so-11-a178719.html",
+        "https://loigiaihay.com/de-thi-hoc-ki-1-toan-10-ket-noi-tri-thuc-de-so-11-a178720.html",
+        "https://loigiaihay.com/de-thi-hoc-ki-1-toan-10-ket-noi-tri-thuc-de-so-15-a189469.html"
+    ]
+    link_math_10_gk2 = [
+        "https://loigiaihay.com/de-thi-giua-ki-2-toan-10-ket-noi-tri-thuc-de-so-1-a156395.html",
+        "https://loigiaihay.com/de-thi-giua-ki-2-toan-10-ket-noi-tri-thuc-de-so-2-a156399.html",
+        "https://loigiaihay.com/de-thi-giua-ki-2-toan-10-ket-noi-tri-thuc-de-so-3-a156400.html",
+        "https://loigiaihay.com/de-kiem-tra-hoc-ki-2-toan-10-de-so-1-ket-noi-tri-thuc-a134980.html",
+        "https://loigiaihay.com/de-kiem-tra-hoc-ki-2-toan-10-de-so-ket-noi-tri-thuc-a135043.html",
+        "https://loigiaihay.com/de-kiem-tra-hoc-ki-2-toan-10-de-so-3-ket-noi-tri-thuc-a135044.html",
+        "https://loigiaihay.com/de-kiem-tra-hoc-ki-2-toan-10-de-so-4-ket-noi-tri-thuc-a135046.html",
+        
+    ]
+    collection_math_10 += link_math_10_gk1
+    collection_math_10 += link_math_10_gk2
+    return collection_math_10
+
 def is_multiple_choice_question(text):
     if not text or not isinstance(text, str):
         return False
@@ -22,33 +62,13 @@ def is_multiple_choice_question(text):
 
     return choice_count >= 2
 
-import re
-
-def split_by_cau(text):
-    if not text or not isinstance(text, str):
-        return []
-
-    # Lookahead để giữ nguyên "Câu X" trong kết quả
-    pattern = r'(?=^\s*Câu\s*\d+\b)'
-
-    questions = re.split(
-        pattern,
-        text,
-        flags=re.MULTILINE | re.IGNORECASE
-    )
-
-    # Loại bỏ phần rỗng
-    return [q.strip() for q in questions if q.strip()]
-
 class StemLoigiaihaySpider(scrapy.Spider):
     name = "stem_loigiaihay"
-    start_urls = [
-        "https://loigiaihay.com/de-thi-giua-ki-1-toan-10-ket-noi-tri-thuc-de-so-1-a121902.html"
-    ]
+    start_urls = create_collection_link_math_10()
     IMAGE_MARK = "[[HAS_IMAGE]]"
     custom_settings = {
         "ITEM_PIPELINES": {
-            # "crawler.pipelines.StemPipeline": 300,
+         "crawler.pipelines.StemPipeline": 300,
         }
     }
     def parse(self, response):
@@ -65,13 +85,15 @@ class StemLoigiaihaySpider(scrapy.Spider):
         
         # Loại bỏ phần tự luận nếu tìm thấy
         idx1 = text.lower().find("tự luận")
-        idx2 = text.lower().find("lời giải chi tiết")
+        idx2 = text.lower().find("lời giải")
         if idx1 != -1 and idx2 != -1 and idx1 < idx2:
             substring1 = text[idx1:idx2]
             text = text.replace(substring1, "")
         
         idx3 = text.find("Phần tự luận")
         idx4 = text.find("HẾT")
+        if idx4 == -1:
+            idx4 = len(text)
         if idx3 != -1 and idx4 != -1 and idx3 < idx4:
             substring2 = text[idx3:idx4]
             text = text.replace(substring2, "")
