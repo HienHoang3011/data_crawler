@@ -5,7 +5,7 @@ import re
 def get_links_from_page(url):
     response = requests.get(url)
     soup = BeautifulSoup(response.text, "html.parser")
-    soup = soup.find("div", id="event_1_columns")
+    soup = soup.find("div", class_ = "box")
     links = []
     for a in soup.find_all('a', href=True):
         href = a['href']
@@ -16,5 +16,5 @@ def get_links_from_page(url):
     return links
 
 if __name__ == "__main__":
-    url = "https://loigiaihay.com/de-thi-de-kiem-tra-hoa-lop-10-ket-noi-tri-thuc-c1191.html"  
+    url = "https://loigiaihay.com/de-thi-de-kiem-tra-toan-lop-12-c1015.html"  
     get_links_from_page(url)

@@ -5,13 +5,6 @@
 
 import scrapy
    
-class ExamMathItem(scrapy.Item):
-    subject = scrapy.Field()
-    grade = scrapy.Field()
-    question = scrapy.Field()
-    reasoning = scrapy.Field()
-    answer = scrapy.Field()
-    
 class PtitItem(scrapy.Item):
     text = scrapy.Field()
     key = scrapy.Field()
