@@ -17,6 +17,47 @@ class LoigiaihaySpider(scrapy.Spider):
          "crawler.pipelines.StemPipeline": 300,
         }
     }
+    
+    def detect_grade_from_url(self, url):
+        """Tự động phát hiện lớp từ URL"""
+        # Ưu tiên các pattern cụ thể trước
+        patterns = [
+            r'lop-(\d{1,2})\b',           # lop-11, lop-12
+            r'toan-(\d{1,2})\b',          # toan-11, toan-6
+            r'vat-l[iy]-(\d{1,2})\b',     # vat-ly-11, vat-li-12
+            r'hoa-hoc-(\d{1,2})\b',       # hoa-hoc-11
+            r'hinh-hoc-(\d{1,2})\b',      # hinh-hoc-11
+            r'-(\d{1,2})-',               # fallback: bất kỳ số nào giữa dấu gạch ngang
+        ]
+        
+        for pattern in patterns:
+            matches = re.findall(pattern, url)
+            if matches:
+                # Ưu tiên lớp 10, 11, 12, sau đó 6-9
+                for grade in ('12', '11', '10', '9', '8', '7', '6'):
+                    if grade in matches:
+                        return grade
+                return matches[0]
+        
+        return "12"  # default
+    
+    def detect_subject_from_url(self, url):
+        """Tự động phát hiện môn học từ URL"""
+        subject_patterns = {
+            'math': [r'toan', r'dai-so', r'giai-tich', r'hinh-hoc'],
+            'physics': [r'vat-l[iy]', r'ly-thuyet'],
+            'chemistry': [r'hoa-hoc', r'hoa-hoc']
+        }
+        
+        url_lower = url.lower()
+        
+        for subject, patterns in subject_patterns.items():
+            for pattern in patterns:
+                if re.search(pattern, url_lower):
+                    return subject
+        
+        return "math"  # default
+    
     def parse(self, response):
         soup = BeautifulSoup(response.text, "html.parser")
         div = soup.find("div", id="box-content")
@@ -34,15 +75,9 @@ class LoigiaihaySpider(scrapy.Spider):
         text = div.get_text("\n")
         text_final = text
         
-        grade = "12"
-        # matches = re.findall(r'-(\d{1,2})', response.url)
-        # if matches:
-        #     for prefer in ('12', '11', '10'):
-        #         if prefer in matches:
-        #             grade = prefer
-        #             break
-        # else:
-        #     grade = matches[0]
+        # Tự động phát hiện lớp và môn học từ URL
+        grade = self.detect_grade_from_url(response.url)
+        subject = self.detect_subject_from_url(response.url)
         
         items = {}              # cau_num -> StemItem
         mode = {}               # cau_num -> "question" | "reasoning"
@@ -58,8 +93,8 @@ class LoigiaihaySpider(scrapy.Spider):
                 # lần đầu → question
                 if cau not in items:
                     item = StemItem()
-                    # minimal fields to populate for easier downstream use
-                    item["subject"] = "physics"
+                    # Sử dụng subject và grade đã detect tự động
+                    item["subject"] = subject
                     item["grade"] = grade
                     item["question"] = text
                     item["reasoning"] = ""

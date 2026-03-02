@@ -16,5 +16,5 @@ def get_links_from_page(url):
     return links
 
 if __name__ == "__main__":
-    url = "https://loigiaihay.com/de-thi-de-kiem-tra-toan-lop-12-c1015.html"  
+    url = "https://loigiaihay.com/de-thi-de-kiem-tra-toan-lop-11-c1016.html"  
     get_links_from_page(url)

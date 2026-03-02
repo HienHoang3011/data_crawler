@@ -5,32 +5,147 @@ def gen_links_1(chuong, start_id, so_de, lop, mon):
     ]
     
 def create_collection_link_math_11():
-    collection_math = []
-    link_chuong_1_11_15p = gen_links_1(chuong=1, start_id=45788, so_de=10, lop=11, mon='math')
-    link_chuong_2_11_15p = gen_links_1(chuong=2, start_id=45832, so_de=9, lop=11, mon='math')
-    link_chuong_3_11_15p = gen_links_1(chuong=3, start_id=50032, so_de=3, lop=11, mon='math')
-    link_chuong_4_11_15p = gen_links_1(chuong=4, start_id=46489, so_de=8, lop=11, mon='math')
-    link_chuong_5_11_15p = gen_links_1(chuong=5, start_id=46507, so_de=5, lop=11, mon='math')
-    link_chuong_1_11_45p = gen_links_1(chuong=1, start_id=45827, so_de=5, lop=11, mon='math')
-    link_chuong_2_11_45p = gen_links_1(chuong=2, start_id=45852, so_de=5, lop=11, mon='math')
-    link_chuong_3_11_45p = gen_links_1(chuong=3, start_id=50035, so_de=2, lop=11, mon='math')
-    link_chuong_4_11_45p = gen_links_1(chuong=4, start_id=46497, so_de=4, lop=11, mon='math')
-    link_chuong_5_11_45p = gen_links_1(chuong=5, start_id=46687, so_de=5, lop=11, mon='math')
-    link_math_11 = link_chuong_1_11_15p + link_chuong_2_11_15p + link_chuong_3_11_15p + link_chuong_4_11_15p + link_chuong_5_11_15p
-    link_math_11 += link_chuong_1_11_45p + link_chuong_2_11_45p + link_chuong_3_11_45p + link_chuong_4_11_45p + link_chuong_5_11_45p
-    collection_math.extend(link_math_11)
-    link_chuong_1_12_15p = gen_links_1(chuong=1, start_id=44772, so_de=5, lop=12, mon='math')
-    link_chuong_2_12_15p = gen_links_1(chuong=2, start_id=44791, so_de=5, lop=12, mon='math')
-    link_chuong_3_12_15p = gen_links_1(chuong=3, start_id=47413, so_de=5, lop=12, mon='math')
-    link_chuong_4_12_15p = gen_links_1(chuong=4, start_id=47424, so_de=5, lop=12, mon='math')
-    link_chuong_1_12_45p = gen_links_1(chuong=1, start_id=44796, so_de=5, lop=12, mon='math')
-    link_chuong_2_12_45p = gen_links_1(chuong=2, start_id=44808, so_de=4, lop=12, mon='math')
-    link_chuong_3_12_45p = gen_links_1(chuong=3, start_id=47429, so_de=5, lop=12, mon='math')
-    link_chuong_4_12_45p = gen_links_1(chuong=4, start_id=47438, so_de=5, lop=12, mon='math')
-    link_math_12 = link_chuong_1_12_15p + link_chuong_2_12_15p + link_chuong_3_12_15p + link_chuong_4_12_15p
-    link_math_12 += link_chuong_1_12_45p + link_chuong_2_12_45p + link_chuong_3_12_45p + link_chuong_4_12_45p
-    collection_math.extend(link_math_12)
-    return collection_math
+    collection_math_11 = [
+        "https://loigiaihay.com/de-thi-de-kiem-tra-toan-lop-11-c1016.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-toan-11-e28169.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-chuong-1-de-so-1-dai-so-va-giai-tich-11-c46a45788.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-chuong-1-de-so-2-dai-so-va-giai-tich-11-a45789.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-chuong-1-de-so-3-dai-so-va-giai-tich-11-a45790.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-chuong-1-de-so-4-dai-so-va-giai-tich-11-a45791.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-chuong-1-de-so-5-dai-so-va-giai-tich-11-a45792.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-chuong-1-de-so-6-dai-so-va-giai-tich-11-a45793.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-chuong-1-de-so-7-dai-so-va-giai-tich-11-a45794.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-chuong-1-de-so-8-dai-so-va-giai-tich-11-a45795.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-chuong-1-de-so-9-dai-so-va-giai-tich-11-a45796.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-chuong-1-de-so-10-dai-so-va-giai-tich-11-a45797.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-chuong-2-de-so-1-dai-so-va-giai-tich-11-c46a45832.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-chuong-2-de-so-2-dai-so-va-giai-tich-11-a45833.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-chuong-2-de-so-3-dai-so-va-giai-tich-11-a45834.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-chuong-2-de-so-4-dai-so-va-giai-tich-11-a45835.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-chuong-2-de-so-5-dai-so-va-giai-tich-11-a45836.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-chuong-2-de-so-6-dai-so-va-giai-tich-11-a45837.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-chuong-2-de-so-7-dai-so-va-giai-tich-11-a45838.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-chuong-2-de-so-8-dai-so-va-giai-tich-11-a45839.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-chuong-2-de-so-9-dai-so-va-giai-tich-11-a45840.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-chuong-3-de-so-1-dai-so-va-giai-tich-11-c46a50032.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-chuong-3-de-so-2-dai-so-va-giai-tich-11-a50033.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-chuong-3-de-so-3-dai-so-va-giai-tich-11-a50034.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-de-so-1-chuong-iv-dai-so-11-c46a46489.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-de-so-2-chuong-iv-dai-so-11-a46490.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-de-so-3-chuong-iv-dai-so-11-a46491.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-de-so-4-chuong-iv-dai-so-11-a46492.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-de-so-5-chuong-iv-dai-so-11-a46493.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-de-so-6-chuong-iv-dai-so-11-a46494.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-de-so-7-chuong-iv-dai-so-11-a46495.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-de-so-8-chuong-iv-dai-so-11-a46496.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-de-so-1-chuong-v-dai-so-11-c46a46507.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-de-so-2-chuong-v-dai-so-11-a46510.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-de-so-3-chuong-v-dai-so-11-a46513.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-de-so-4-chuong-v-dai-so-11-a46516.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-de-so-5-chuong-v-dai-so-11-a46518.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-de-so-1-chuong-i-hinh-hoc-11-c46a46554.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-de-so-2-chuong-i-hinh-hoc-11-a46555.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-de-so-3-chuong-i-hinh-hoc-11-a46556.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-de-so-4-chuong-i-hinh-hoc-11-a46557.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-de-so-5-chuong-i-hinh-hoc-11-a46558.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-de-so-1-chuong-2-hinh-hoc-11-c46a50039.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-de-so-2-chuong-2-hinh-hoc-11-a50040.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-de-so-1-chuong-iii-hinh-hoc-11-c46a46479.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-de-so-2-chuong-iii-hinh-hoc-11-a46480.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-de-so-3-chuong-iii-hinh-hoc-11-a46481.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-de-so-4-chuong-iii-hinh-hoc-11-a46482.html",
+        "https://loigiaihay.com/de-kiem-tra-15-phut-de-so-5-chuong-iii-hinh-hoc-11-a46483.html",
+        "https://loigiaihay.com/de-kiem-tra-1-tiet-toan-11-e28172.html",
+        "https://loigiaihay.com/de-kiem-tra-45-phut-1-tiet-chuong-1-de-so-1-dai-so-va-giai-tich-11-c46a45827.html",
+        "https://loigiaihay.com/de-kiem-tra-45-phut-1-tiet-chuong-1-de-so-2-dai-so-va-giai-tich-11-a45828.html",
+        "https://loigiaihay.com/de-kiem-tra-45-phut-1-tiet-chuong-1-de-so-3-dai-so-va-giai-tich-11-a45829.html",
+        "https://loigiaihay.com/de-kiem-tra-45-phut-1-tiet-chuong-1-de-so-4-dai-so-va-giai-tich-11-a45830.html",
+        "https://loigiaihay.com/de-kiem-tra-45-phut-1-tiet-chuong-1-de-so-5-dai-so-va-giai-tich-11-a45831.html",
+        "https://loigiaihay.com/de-kiem-tra-45-phut-1-tiet-chuong-2-de-so-1-dai-so-va-giai-tich-11-c46a45852.html",
+        "https://loigiaihay.com/de-kiem-tra-45-phut-1-tiet-chuong-2-de-so-2-dai-so-va-giai-tich-11-a45854.html",
+        "https://loigiaihay.com/de-kiem-tra-45-phut-1-tiet-chuong-2-de-so-3-dai-so-va-giai-tich-11-a45855.html",
+        "https://loigiaihay.com/de-kiem-tra-45-phut-1-tiet-chuong-2-de-so-4-dai-so-va-giai-tich-11-a45856.html",
+        "https://loigiaihay.com/de-kiem-tra-45-phut-1-tiet-chuong-2-de-so-5-dai-so-va-giai-tich-11-a45857.html",
+        "https://loigiaihay.com/de-kiem-tra-45-phut-1-tiet-chuong-3-de-so-1-dai-so-va-giai-tich-11-c46a50035.html",
+        "https://loigiaihay.com/de-kiem-tra-45-phut-1-tiet-chuong-3-de-so-2-dai-so-va-giai-tich-11-a50036.html",
+        "https://loigiaihay.com/de-kiem-tra-45-phut-1-tiet-de-so-1-chuong-iv-dai-so-11-c46a46497.html",
+        "https://loigiaihay.com/de-kiem-tra-45-phut-1-tiet-de-so-2-chuong-iv-dai-so-11-a46498.html",
+        "https://loigiaihay.com/de-kiem-tra-45-phut-1-tiet-de-so-3-chuong-iv-dai-so-11-a46499.html",
+        "https://loigiaihay.com/de-kiem-tra-45-phut-1-tiet-de-so-4-chuong-iv-dai-so-11-a46503.html",
+        "https://loigiaihay.com/de-kiem-tra-45-phut-1-tiet-de-so-1-chuong-5-dai-so-va-giai-tich-11-c46a46687.html",
+        "https://loigiaihay.com/de-kiem-tra-45-phut-1-tiet-de-so-2-chuong-5-dai-so-va-giai-tich-11-a46688.html",
+        "https://loigiaihay.com/de-kiem-tra-45-phut-1-tiet-de-so-3-chuong-5-dai-so-va-giai-tich-11-a46689.html",
+        "https://loigiaihay.com/de-kiem-tra-45-phut-1-tiet-de-so-4-chuong-5-dai-so-va-giai-tich-11-a46722.html",
+        "https://loigiaihay.com/de-kiem-tra-45-phut-1-tiet-de-so-5-chuong-5-dai-so-va-giai-tich-11-a46723.html",
+        "https://loigiaihay.com/de-kiem-tra-45-phut-1-tiet-de-so-1-chuong-1-hinh-hoc-11-c46a46684.html",
+        "https://loigiaihay.com/de-kiem-tra-45-phut-1-tiet-de-so-2-chuong-1-hinh-hoc-11-a46685.html",
+        "https://loigiaihay.com/de-kiem-tra-45-phut-1-tiet-de-so-3-chuong-1-hinh-hoc-11-a46686.html",
+        "https://loigiaihay.com/de-kiem-tra-45-phut-1-tiet-de-so-1-chuong-3-hinh-hoc-11-c46a50041.html",
+        "https://loigiaihay.com/de-kiem-tra-45-phut-1-tiet-de-so-1-chuong-iii-hinh-hoc-11-c46a46484.html",
+        "https://loigiaihay.com/de-kiem-tra-45-phut-1-tiet-de-so-2-chuong-iii-hinh-hoc-11-a46485.html",
+        "https://loigiaihay.com/de-kiem-tra-45-phut-1-tiet-de-so-3-chuong-iii-hinh-hoc-11-a46486.html",
+        "https://loigiaihay.com/de-kiem-tra-45-phut-1-tiet-de-so-4-chuong-iii-hinh-hoc-11-a46487.html",
+        "https://loigiaihay.com/de-kiem-tra-45-phut-1-tiet-de-so-5-chuong-iii-hinh-hoc-11-a46488.html",
+        "https://loigiaihay.com/de-thi-giua-ki-1-e20486.html",
+        "https://loigiaihay.com/de-kiem-tra-giua-ki-1-toan-11-de-so-1-co-loi-giai-chi-tiet-a83833.html",
+        "https://loigiaihay.com/de-kiem-tra-giua-ki-1-toan-11-de-so-2-co-loi-giai-chi-tiet-a83869.html",
+        "https://loigiaihay.com/giai-de-thi-giua-hoc-ki-1-toan-lop-11-nam-2020-2021-truong-thpt-xuan-phuong-a84309.html",
+        "https://loigiaihay.com/de-thi-hoc-ki-1-toan-11-e28175.html",
+        "https://loigiaihay.com/de-cuong-on-tap-hoc-ky-i-mon-toan-lop-11-a84278.html",
+        "https://loigiaihay.com/de-so-1-de-kiem-tra-hoc-ki-1-toan-11-a48108.html",
+        "https://loigiaihay.com/de-so-2-de-kiem-tra-hoc-ki-1-toan-11-a48110.html",
+        "https://loigiaihay.com/de-so-3-de-kiem-tra-hoc-ki-1-toan-11-a48121.html",
+        "https://loigiaihay.com/de-so-4-de-kiem-tra-hoc-ki-1-toan-11-a48123.html",
+        "https://loigiaihay.com/de-so-5-de-kiem-tra-hoc-ki-1-toan-11-a48125.html",
+        "https://loigiaihay.com/de-so-6-de-kiem-tra-hoc-ki-1-toan-11-a48128.html",
+        "https://loigiaihay.com/de-so-7-de-kiem-tra-hoc-ki-1-toan-11-a48129.html",
+        "https://loigiaihay.com/de-so-8-de-kiem-tra-hoc-ki-1-toan-11-a48131.html",
+        "https://loigiaihay.com/de-so-9-de-kiem-tra-hoc-ki-1-toan-11-a48133.html",
+        "https://loigiaihay.com/de-so-10-de-kiem-tra-hoc-ki-1-toan-11-a48136.html",
+        "https://loigiaihay.com/de-so-11-de-kiem-tra-hoc-ki-1-toan-11-a48137.html",
+        "https://loigiaihay.com/de-so-12-de-kiem-tra-hoc-ki-1-toan-11-a48138.html",
+        "https://loigiaihay.com/de-so-11-de-kiem-tra-hoc-ki-1-toan-10-a47911.html",
+        "https://loigiaihay.com/giai-de-thi-hoc-ki-1-mon-toan-lop-11-truong-thpt-chuyen-le-hong-phong-nam-2020-2021-a84602.html",
+        "https://loigiaihay.com/giai-de-thi-hoc-ki-1-toan-lop-11-nam-2020-2021-so-gd-dt-tinh-kon-tum-a84713.html",
+        "https://loigiaihay.com/giai-de-thi-hoc-ki-1-toan-lop-11-nam-2019-2020-truong-thpt-nguyen-tat-thanh-a78707.html",
+        "https://loigiaihay.com/giai-de-thi-hoc-ki-1-toan-lop-11-nam-2019-2020-truong-thpt-chuyen-tran-dai-nghia-a78781.html",
+        "https://loigiaihay.com/giai-de-thi-hoc-ki-1-toan-lop-11-nam-2019-2020-so-giao-duc-vinh-phuc-a78706.html",
+        "https://loigiaihay.com/giai-de-thi-hoc-ki-1-toan-lop-11-nam-2019-2020-truong-thpt-tran-phu-a78633.html",
+        "https://loigiaihay.com/giai-de-thi-hoc-ki-1-mon-toan-lop-11-nam-2019-2020-so-gddt-bac-ninh-a79004.html",
+        "https://loigiaihay.com/giai-de-thi-ki-1-mon-toan-lop-11-nam-2019-2020-truong-thpt-tran-hung-dao-thanh-xuan-a78428.html",
+        "https://loigiaihay.com/giai-de-thi-ki-1-mon-toan-lop-11-nam-2019-2020-truong-thpt-kim-lien-a78479.html",
+        "https://loigiaihay.com/de-thi-hoc-ki-1-lop-11-co-loi-giai-tat-ca-cac-mon-a84511.html",
+        "https://loigiaihay.com/de-cuong-on-tap-hoc-ky-i-mon-toan-lop-11-a84278.html",
+        "https://loigiaihay.com/de-cuong-on-thi-hoc-ky-i-mon-toan-lop-11-a84530.html",
+        "https://loigiaihay.com/de-kiem-tra-giua-ki-2-e20969.html",
+        "https://loigiaihay.com/de-kiem-tra-giua-ki-2-toan-11-de-so-1-co-loi-giai-chi-tiet-a84958.html",
+        "https://loigiaihay.com/de-kiem-tra-giua-ki-2-toan-11-de-so-2-co-loi-giai-chi-tiet-a84959.html",
+        "https://loigiaihay.com/de-kiem-tra-giua-ki-2-toan-11-de-so-3-co-loi-giai-chi-tiet-a84960.html",
+        "https://loigiaihay.com/de-kiem-tra-giua-ki-2-toan-11-de-so-4-co-loi-giai-chi-tiet-a84961.html",
+        "https://loigiaihay.com/de-kiem-tra-giua-ki-2-toan-11-de-so-5-co-loi-giai-chi-tiet-a84962.html",
+        "https://loigiaihay.com/de-kiem-tra-hoc-ki-2-de-thi-hoc-ki-2-toan-11-e11345.html",
+        "https://loigiaihay.com/de-thi-giai-de-thi-hoc-ki-2-toan-lop-11-nam-2020-2021-truong-thpt-tran-phu-exam86056.html",
+        "https://loigiaihay.com/de-thi-giai-de-thi-hoc-ki-2-toan-lop-11-nam-2020-2021-truong-phan-ngoc-hien-exam86078.html",
+        "https://loigiaihay.com/giai-de-thi-hoc-ki-2-toan-lop-11-nam-2019-2020-truong-thpt-kim-lien-ha-noi-a81065.html",
+        "https://loigiaihay.com/de-thi-giai-de-thi-hoc-ki-2-toan-lop-11-nam-2020-2021-so-gddt-quang-nam-exam86807.html",
+        "https://loigiaihay.com/de-thi-giai-de-thi-hoc-ki-2-toan-lop-11-nam-2020-2021-truong-thpt-ngo-gia-tu-exam86882.html",
+        "https://loigiaihay.com/giai-de-thi-hoc-ki-2-toan-lop-11-nam-2019-2020-truong-thpt-phu-luong-thai-nguyen-a80942.html",
+        "https://loigiaihay.com/giai-de-thi-hoc-ki-2-toan-lop-11-nam-2019-2020-so-gddt-bac-ninh-a81035.html",
+        "https://loigiaihay.com/de-thi-giai-de-thi-hoc-ki-2-toan-lop-11-nam-2020-2021-truong-thpt-doan-thuong-exam86803.html",
+        "https://loigiaihay.com/giai-de-thi-hoc-ki-2-toan-lop-11-nam-2019-2020-truong-thpt-bui-thi-xuan-tp-ho-chi-minh-a81067.html",
+        "https://loigiaihay.com/giai-de-thi-hoc-ki-2-toan-lop-11-nam-2019-2020-truong-thpt-nguyen-thi-minh-khai-tp-ho-chi-minh-a81109.html",
+        "https://loigiaihay.com/de-so-1-de-kiem-tra-hoc-ki-2-de-thi-hoc-ki-2-toan-hoc-11-c46a50449.html",
+        "https://loigiaihay.com/de-so-2-de-kiem-tra-hoc-ki-2-de-thi-hoc-ki-2-toan-hoc-11-a50471.html",
+        "https://loigiaihay.com/de-so-3-de-kiem-tra-hoc-ki-2-de-thi-hoc-ki-2-toan-hoc-11-a50472.html",
+        "https://loigiaihay.com/de-so-4-de-kiem-tra-hoc-ki-2-de-thi-hoc-ki-2-toan-hoc-11-a50474.html",
+        "https://loigiaihay.com/de-so-5-de-kiem-tra-hoc-ki-2-de-thi-hoc-ki-2-toan-hoc-11-a50475.html",
+        "https://loigiaihay.com/de-so-6-de-kiem-tra-hoc-ki-2-de-thi-hoc-ki-2-toan-hoc-11-a50476.html",
+        "https://loigiaihay.com/de-so-7-de-kiem-tra-hoc-ki-2-de-thi-hoc-ki-2-toan-hoc-11-a50477.html",
+        "https://loigiaihay.com/de-so-8-de-kiem-tra-hoc-ki-2-de-thi-hoc-ki-2-toan-hoc-11-a50478.html",
+        "https://loigiaihay.com/de-so-9-de-kiem-tra-hoc-ki-2-de-thi-hoc-ki-2-toan-hoc-11-a50479.html",
+        "https://loigiaihay.com/de-so-10-de-kiem-tra-hoc-ki-2-de-thi-hoc-ki-2-toan-hoc-11-a50480.html"
+    ]
+    return collection_math_11
 
 
 def create_collection_link_math_6():
